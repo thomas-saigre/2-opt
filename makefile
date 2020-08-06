@@ -8,11 +8,11 @@ SFML = -lsfml-graphics -lsfml-window -lsfml-system
 
 all: 2_opt
 
-2_opt: main.o villes.o
-	$(CC) $(DEBUG) main.o villes.o -o 2_opt $(SFML)
+2_opt: main.o chemin.o
+	$(CC) $(DEBUG) main.o chemin.o -o 2_opt $(SFML)
 
-villes.o : villes.cpp
-	$(CC) $(CFLAGS) $(DEBUG) villes.cpp
+chemin.o : chemin.cpp
+	$(CC) $(CFLAGS) $(DEBUG) chemin.cpp
 
 
 clean:
