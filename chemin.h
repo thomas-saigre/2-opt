@@ -63,7 +63,7 @@ class Chemin
 public:
 	Chemin(Villes villes):
 		nb_villes_(villes.get_villes().size()), chemin_(villes.get_villes().size()),
-		villes_(villes) {}
+		villes_(&villes) {}
 	void init_Random();
 	void init_Order();
 
@@ -74,7 +74,7 @@ public:
 private:
 	int nb_villes_;
 	std::vector<int> chemin_;	// indice des villes dans le chemin
-	Villes villes_;
+	Villes *villes_;
 };
 
 #endif
