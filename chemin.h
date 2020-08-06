@@ -2,13 +2,17 @@
 #include <cstdlib>
 #include <iostream>
 
-#ifndef VILLES_H_
-#define VILLES_H_
+#ifndef CHEMIN_H_
+#define CHEMIN_H_
+
+
 
 
 class Villes
 {
 public:
+	// using villes_t = std::vector<std::pair<int,int>>;
+	// using ville_t  = std::pair<int,int>;
 	// Initialise les villes aléatoirement
 	Villes(int n, bool _verbose = false,
 		   int _min_x=0, int _max_x=100, int _min_y=0, int _max_y=100) :
@@ -19,14 +23,36 @@ public:
 			villes_[i].first  = rand() % (_max_x+_min_x) + _min_x;
 			villes_[i].second = rand() % (_max_y+_min_y) + _min_y;
 			if (verbose_)
-				std::cout << villes_[i].first << "," << villes_[i].second << std::endl;
+				std::cout << "Création ville " << i <<
+				"(" << villes_[i].first << "," << villes_[i].second << ")" << std::endl;
 		}
 	}
+
+	// mutateurs
+	void set_ville(int i, int x, int y);
+
+	// accesseurs
+	std::vector<std::pair<int,int>> get_villes() const;
+	std::pair<int,int> get_ville(int i) const;
+
 
 private:
 	std::vector<std::pair<int,int>> villes_ ;
 	bool verbose_ ;
 };
+
+
+
+
+class Chemin
+{
+public:
+
+private:
+	int nb_villes_;
+	std::vector<int> chemin_;	// indice des villes dans le chemin
+	Villes villes_;
+}
 
 
 #endif
