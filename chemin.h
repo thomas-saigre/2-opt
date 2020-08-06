@@ -6,6 +6,9 @@
 #define CHEMIN_H_
 
 
+using ville_t  = std::pair<int,int>;
+using villes_t = std::vector<ville_t>;
+
 class Villes
 {
 public:
@@ -19,14 +22,36 @@ public:
 			villes_[i].first  = rand() % (_max_x+_min_x) + _min_x;
 			villes_[i].second = rand() % (_max_y+_min_y) + _min_y;
 			if (verbose_)
-				std::cout << villes_[i].first << "," << villes_[i].second << std::endl;
+				std::cout << "Création ville " << i <<
+					"(" << villes_[i].first << "," << villes_[i].second << ")" << std::endl;
 		}
 	}
 
+	// mutateurs
+	void set_ville(int i, int x, int y);
+
+	// accesseurs
+	villes_t get_villes() const;
+	ville_t get_ville(int i) const;
+
+
+
 private:
-	std::vector<std::pair<int,int>> villes_ ;
+	villes_t villes_ ;
 	bool verbose_ ;
 };
 
+
+
+
+class Chemin
+{
+public:
+
+private:
+	int nb_villes_;
+	std::vector<int> chemin_;	// indice des villes dans le chemin
+	Villes villes_;
+};
 
 #endif
