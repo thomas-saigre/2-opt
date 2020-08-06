@@ -3,6 +3,9 @@
 #include <cstdlib>
 #include <iostream>
 
+
+
+
 void Villes::set_ville(int i, int x, int y)
 {
 	villes_[i].first  = x;

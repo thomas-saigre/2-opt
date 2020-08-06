@@ -6,6 +6,7 @@
 #define CHEMIN_H_
 
 
+
 using ville_t  = std::pair<int,int>;
 using villes_t = std::vector<ville_t>;
 
