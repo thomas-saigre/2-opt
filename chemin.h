@@ -9,17 +9,17 @@
 
 using ville_t  = std::pair<int,int>;
 using villes_t = std::vector<ville_t>;
-using chemin_t = std::vector<int>;
+using chemin_t = std::vector<unsigned long >;
 
 class Villes
 {
 public:
 	// Initialise les villes aléatoirement
-	Villes(int n, bool _verbose = false,
+	Villes(unsigned long n, bool _verbose = false,
 		   int _min_x=0, int _max_x=100, int _min_y=0, int _max_y=100) :
 	villes_(n), verbose_(_verbose)
 	{
-		for (int i=0; i<n; i++)
+		for (unsigned long i=0; i<n; i++)
 		{
 			villes_[i].first  = rand() % (_max_x+_min_x) + _min_x;
 			villes_[i].second = rand() % (_max_y+_min_y) + _min_y;
@@ -30,9 +30,9 @@ public:
 	}
 	Villes(Villes const &v): villes_(v.get_villes().size()), verbose_(v.verbose_)
 	{
-		int n = villes_.size();
+		unsigned long n = villes_.size();
 		if (verbose_) std::cout << "Construction par copie" << std::endl ;
-		for (int i=0; i<n; i++)
+		for (unsigned long i=0; i<n; i++)
 		{
 			villes_[i].first  = v.get_ville(i).first;
 			villes_[i].second = v.get_ville(i).second;
@@ -43,11 +43,12 @@ public:
 	}
 
 	// mutateurs
-	void set_ville(int i, int x, int y);
+	void set_ville(unsigned long i, int x, int y);
 
 	// accesseurs
 	villes_t get_villes() const;
-	ville_t get_ville(int i) const;
+	ville_t get_ville(unsigned long i) const;
+	void display() const;
 
 
 private:
@@ -61,21 +62,23 @@ private:
 class Chemin
 {
 public:
-	Chemin(Villes villes):
-	nb_villes_(villes.get_villes().size()), chemin_(villes.get_villes().size())
+	Chemin(Villes *villes):
+	nb_villes_(villes->get_villes().size()), chemin_(villes->get_villes().size())
 	{
-		villes_ = &villes;
+		std::cout << "ici\n";
+		villes_ = villes;
 	}
 	void init_Random();
 	void init_Order();
 
 
-	int nb_villes() const;
+	unsigned long nb_villes() const;
 	chemin_t chemin() const;
+	void display() const;
 
 private:
-	int nb_villes_;
-	std::vector<int> chemin_;	// indice des villes dans le chemin
+	unsigned long nb_villes_;
+	chemin_t chemin_;	// indice des villes dans le chemin
 	Villes *villes_;
 };
 

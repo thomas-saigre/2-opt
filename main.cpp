@@ -23,7 +23,8 @@ int main (int argc, char ** argv)
 	// Gestion des options
 	int c ;
 	bool verbose, errflag = false ;
-	int n = 10, x_min=0, x_max=100, y_min=0, y_max=100 ;
+	unsigned long n = 10 ;
+	int x_min=0, x_max=100, y_min=0, y_max=100 ;
 	extern char *optarg ;
 	extern int optind ;
 	while ((c = getopt (argc, argv, "hvn:x:X:y:Y:")) != -1)
@@ -37,7 +38,7 @@ int main (int argc, char ** argv)
 			verbose = true ;
 			break ;
 		case 'n':
-			n = atoi (optarg) ;
+			n = (unsigned long) atoi (optarg) ;
 			break;
 		case 'x':
 			x_min = atoi (optarg) ;
@@ -65,5 +66,12 @@ int main (int argc, char ** argv)
 
 
 	Villes v(n,verbose,x_min,x_max,y_min,y_max);
+	v.display();
+
+	std::cout << "thomas\n";
+	Chemin ch(&v);
+	ch.init_Order();
+	ch.display();
+
 	return 0;
 }
