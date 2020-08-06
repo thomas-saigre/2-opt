@@ -23,3 +23,31 @@ ville_t Villes::get_ville(int i) const
 {
 	return villes_[i];
 }
+
+
+
+
+
+int Chemin::nb_villes() const
+{
+	return nb_villes_;
+}
+
+
+chemin_t Chemin::chemin() const
+{
+	return chemin_;
+}
+
+
+void Chemin::init_Random()
+{
+
+}
+
+
+void Chemin::init_Order()
+{
+	for (int i=0; i<nb_villes(); i++)
+		chemin_[i] = i;
+}

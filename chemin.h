@@ -9,6 +9,7 @@
 
 using ville_t  = std::pair<int,int>;
 using villes_t = std::vector<ville_t>;
+using chemin_t = std::vector<int>;
 
 class Villes
 {
@@ -27,6 +28,19 @@ public:
 					"(" << villes_[i].first << "," << villes_[i].second << ")" << std::endl;
 		}
 	}
+	Villes(Villes const &v): villes_(v.get_villes().size()), verbose_(v.verbose_)
+	{
+		int n = villes_.size();
+		if (verbose_) std::cout << "Construction par copie" << std::endl ;
+		for (int i=0; i<n; i++)
+		{
+			villes_[i].first  = v.get_ville(i).first;
+			villes_[i].second = v.get_ville(i).second;
+			if (verbose_)
+				std::cout << "Création ville " << i <<
+					"(" << villes_[i].first << "," << villes_[i].second << ")" << std::endl;
+		}
+	}
 
 	// mutateurs
 	void set_ville(int i, int x, int y);
@@ -34,7 +48,6 @@ public:
 	// accesseurs
 	villes_t get_villes() const;
 	ville_t get_ville(int i) const;
-
 
 
 private:
@@ -48,6 +61,15 @@ private:
 class Chemin
 {
 public:
+	Chemin(Villes villes):
+		nb_villes_(villes.get_villes().size()), chemin_(villes.get_villes().size()),
+		villes_(villes) {}
+	void init_Random();
+	void init_Order();
+
+
+	int nb_villes() const;
+	chemin_t chemin() const;
 
 private:
 	int nb_villes_;
