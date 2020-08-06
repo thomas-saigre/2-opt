@@ -9,7 +9,6 @@ void help ()
 {
 	std::cout << "usage : 2_opt [options]" << std::endl ;
 	std::cout << "\t-h\t\tafficher l'aide" << std::endl ;
-	std::cout << "\t-v\t\tmode verbose" << std::endl ;
 	std::cout << "\t-n nombre\tmodifie le nombre de villes (défaut 10)"  << std::endl ;
 	std::cout << "\t-x|-y nombre\tcoordonnées minimales (défaut 0)" << std::endl ;
 	std::cout << "\t-X|-Y nombre\tcoordonnées maximales (défaut 100)" << std::endl ;
@@ -22,7 +21,7 @@ int main (int argc, char ** argv)
 {
 	// Gestion des options
 	int c ;
-	bool verbose, errflag = false ;
+	bool errflag = false ;
 	unsigned long n = 10 ;
 	int x_min=0, x_max=100, y_min=0, y_max=100 ;
 	extern char *optarg ;
@@ -33,9 +32,6 @@ int main (int argc, char ** argv)
 		case 'h':
 			help () ;
 			exit (0) ;
-			break ;
-		case 'v':
-			verbose = true ;
 			break ;
 		case 'n':
 			n = (unsigned long) atoi (optarg) ;
@@ -65,7 +61,7 @@ int main (int argc, char ** argv)
 	}
 
 
-	Villes v(n,verbose,x_min,x_max,y_min,y_max);
+	Villes v(n,x_min,x_max,y_min,y_max);
 	v.display();
 
 	std::cout << "thomas\n";
