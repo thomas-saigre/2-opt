@@ -95,7 +95,7 @@ double Chemin::length() const
 {
 	double d = 0;
 	for (int i=0; i<nb_villes(); i++)
-		d += distance(i, (i+1)%nb_villes());
+		d += distance( chemin_[i], chemin_[(i+1)%nb_villes()] );
 	return d;
 }
 
