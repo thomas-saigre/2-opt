@@ -110,6 +110,13 @@ double Chemin::gain(int i, int j) const
 
 
 
+ville_t Chemin::get_ville(int i) const
+{
+	return villes()->get_ville( chemin_[i] ) ;
+}
+
+
+
 
 void Chemin::render() const
 {
@@ -124,8 +131,8 @@ void Chemin::render() const
 		int j = (i+1) % nb_villes() ;
 		sf::Vertex line[] =
 		{
-			sf::Vertex(sf::Vector2f(villes()->get_ville(i).first, villes()->get_ville(i).second)),
-			sf::Vertex(sf::Vector2f(villes()->get_ville(j).first, villes()->get_ville(j).second)),
+			sf::Vertex(sf::Vector2f(get_ville( i ).first, get_ville( i ).second)),
+			sf::Vertex(sf::Vector2f(get_ville( j ).first, get_ville( j ).second)),
 		};
 		window_->draw(line, 2, sf::Lines);
 	}
@@ -176,8 +183,11 @@ void Chemin::init_Order()
 void Chemin::opt()
 {
 	bool ame = true ;
+	int m = 0;
 	while (ame)
 	{
+		std::cout << "itération " << m << std::endl ;
+		m++;
 		ame = false ;
 		std::cout << length() << std::endl ;
 		for (int i=0; i<nb_villes(); i++){

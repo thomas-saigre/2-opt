@@ -68,6 +68,7 @@ public:
 
 	int nb_villes() const;
 	Villes *villes() const;
+	ville_t get_ville(int i) const;
 	chemin_t chemin() const;
 	int ville(int i) const;
 	void display() const;

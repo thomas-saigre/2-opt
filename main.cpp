@@ -76,7 +76,6 @@ int main (int argc, char ** argv)
 
 
 	std::thread thread_opt( &Chemin::opt, &ch );
-	// ch.opt() ;
 
 
 	while (window.isOpen())
@@ -94,7 +93,10 @@ int main (int argc, char ** argv)
 		window.clear(sf::Color::Black);
 
 		// c'est ici qu'on dessine tout
+
 		ch.render() ;
+		std::cout << ">";
+		ch.display();
 
 		// fin de la frame courante, affichage de tout ce qu'on a dessiné
 		window.display();
