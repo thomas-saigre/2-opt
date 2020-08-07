@@ -183,11 +183,8 @@ void Chemin::init_Order()
 void Chemin::opt()
 {
 	bool ame = true ;
-	int m = 0;
 	while (ame)
 	{
-		std::cout << "itération " << m << std::endl ;
-		m++;
 		ame = false ;
 		std::cout << length() << std::endl ;
 		for (int i=0; i<nb_villes(); i++){
@@ -196,13 +193,13 @@ void Chemin::opt()
 				if ( (j != (i-1)%nb_villes()) && (j != (i+1)%nb_villes()) && (j != i)
 					 && (gain(i,j) > 0))
 				{
-					display();
 					echanger_aretes(i,j);
-					sleep (1);
+					usleep( TPS_ATTENTE );
 					ame = true;
 				}
 			}
 		}
 	}
 	std::cout << "Done : " << length() << std::endl ;
+	display();
 }

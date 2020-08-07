@@ -7,7 +7,8 @@
 #define CHEMIN_H_
 
 
-#define TAILLE_VILLE 5.f
+#define TAILLE_VILLE 3.f
+#define TPS_ATTENTE 41000
 
 
 
