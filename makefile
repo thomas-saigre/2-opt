@@ -3,7 +3,7 @@
 
 CC = clang++
 CFLAGS = -c
-DEBUG = -Wall -Werror -Wextra
+DEBUG = -g -Wall -Werror -Wextra
 SFML = -lsfml-graphics -lsfml-window -lsfml-system
 
 all: 2_opt
@@ -20,3 +20,7 @@ chemin.o : chemin.cpp chemin.h
 
 clean:
 	\rm *.o 2_opt
+
+run: all
+run:
+	./2_opt
