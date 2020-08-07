@@ -2,6 +2,7 @@
 #include "chemin.h"
 #include <cstdlib>
 #include <iostream>
+#include <cmath>
 
 
 // On suppose a<b
@@ -69,12 +70,50 @@ void Chemin::display() const
 
 
 
+double Chemin::distance(int i, int j) const
+{
+	double  x1 = villes_->get_ville(i).first,  x2 = villes_->get_ville(j).first,
+			y1 = villes_->get_ville(i).second, y2 = villes_->get_ville(j).second;
+	return sqrt( (x2-x1)*(x2-x1) + (y2-y1)*(y2-y1) );
+}
+
+
+double Chemin::length() const
+{
+	double d = 0;
+	for (int i=0; i<nb_villes(); i++)
+		d += distance(i, (i+1)%nb_villes());
+	return d;
+}
+
+
+double Chemin::gain(int i, int j) const
+{
+	return distance( i, (i+1)%nb_villes() ) + distance( j, (j+1)%nb_villes() )
+			- distance( i, j ) - distance( (i+1)%nb_villes(), (j+1)%nb_villes() );
+}
+
+
+
+
 void Chemin::echanger(int i, int j)
 {
 	int tmp = chemin_[i] ;
 	chemin_[i] = chemin_[j] ;
 	chemin_[j] = tmp ; 
 }
+
+void Chemin::echanger_aretes(int i, int j)
+{
+	int k = i+1, l = j ;
+	while (k < l)
+	{
+		echanger(k, l) ;
+		k++ ;
+		l-- ;
+	}
+}
+
 
 
 
@@ -93,4 +132,29 @@ void Chemin::init_Order()
 {
 	for (int i=0; i<nb_villes(); i++)
 		chemin_[i] = i ;
+}
+
+
+
+void Chemin::opt()
+{
+	bool ame = true ;
+	while (!ame)
+	{
+		ame = false ;
+		std::cout << length() << std::endl ;
+		for (int i=0; i<nb_villes(); i++){
+			for (int j=0; j<nb_villes(); j++)
+			{
+				if ( (j != (i-1)%nb_villes()) && (j != (i+1)%nb_villes()) && (j != i)
+					 && (gain(i,j) > 0))
+				{
+					display();
+					echanger_aretes(i,j);
+					ame = true;
+				}
+			}
+		}
+	}
+	std::cout << "Done : " << length() << std::endl ;
 }

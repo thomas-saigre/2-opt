@@ -62,12 +62,16 @@ public:
 	void init_Random();
 	void init_Order();
 
-	void echanger(int i, int j);
-
-
 	int nb_villes() const;
 	chemin_t chemin() const;
 	void display() const;
+	double distance(int i, int j) const;
+	double length() const;
+	double gain(int i, int j) const;
+
+	void echanger(int i, int j);
+	void echanger_aretes(int i, int j);
+	void opt();
 
 private:
 	int nb_villes_;

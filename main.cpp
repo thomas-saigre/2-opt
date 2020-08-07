@@ -68,5 +68,7 @@ int main (int argc, char ** argv)
 	ch.init_Random();
 	ch.display();
 
+	ch.opt();
+
 	return 0;
 }
