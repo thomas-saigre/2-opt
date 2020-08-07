@@ -1,9 +1,13 @@
 #include <vector>
 #include <cstdlib>
 #include <iostream>
+#include <SFML/Graphics.hpp>
 
 #ifndef CHEMIN_H_
 #define CHEMIN_H_
+
+
+#define TAILLE_VILLE 5.f
 
 
 
@@ -15,14 +19,13 @@ class Villes
 {
 public:
 	// Initialise les villes aléatoirement
-	Villes(int n,
-		   int _min_x=0, int _max_x=100, int _min_y=0, int _max_y=100) :
+	Villes(int n, int _max_x=800, int _max_y=600) :
 	villes_(n)
 	{
 		for (int i=0; i<n; i++)
 		{
-			villes_[i].first  = rand() % (_max_x+_min_x) + _min_x;
-			villes_[i].second = rand() % (_max_y+_min_y) + _min_y;
+			villes_[i].first  = rand() % _max_x;
+			villes_[i].second = rand() % _max_y;
 		}
 	}
 	Villes(Villes const &v): villes_(v.get_villes().size())
@@ -63,11 +66,14 @@ public:
 	void init_Order();
 
 	int nb_villes() const;
+	Villes *villes() const;
 	chemin_t chemin() const;
 	void display() const;
 	double distance(int i, int j) const;
 	double length() const;
 	double gain(int i, int j) const;
+
+	void render(sf::RenderWindow *window) const;
 
 	void echanger(int i, int j);
 	void echanger_aretes(int i, int j);

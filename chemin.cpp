@@ -52,6 +52,12 @@ int Chemin::nb_villes() const
 }
 
 
+Villes *Chemin::villes() const
+{
+	return villes_;
+}
+
+
 chemin_t Chemin::chemin() const
 {
 	return chemin_;
@@ -93,6 +99,28 @@ double Chemin::gain(int i, int j) const
 			- distance( i, j ) - distance( (i+1)%nb_villes(), (j+1)%nb_villes() );
 }
 
+
+
+
+void Chemin::render(sf::RenderWindow *window) const
+{
+	for (int i=0; i<nb_villes(); i++)
+	{
+		sf::CircleShape ville( TAILLE_VILLE );
+		ville.setPosition( villes()->get_ville(i).first  - ((int) TAILLE_VILLE)/2,
+						   villes()->get_ville(i).second - ((int) TAILLE_VILLE)/2 );
+		ville.setFillColor( sf::Color(255,255,0) );
+		window->draw( ville );
+
+		int j = (i+1) % nb_villes() ;
+		sf::Vertex line[] =
+		{
+			sf::Vertex(sf::Vector2f(villes()->get_ville(i).first, villes()->get_ville(i).second)),
+			sf::Vertex(sf::Vector2f(villes()->get_ville(j).first, villes()->get_ville(j).second)),
+		};
+		window->draw(line, 2, sf::Lines);
+	}
+}
 
 
 
@@ -139,7 +167,7 @@ void Chemin::init_Order()
 void Chemin::opt()
 {
 	bool ame = true ;
-	while (!ame)
+	while (ame)
 	{
 		ame = false ;
 		std::cout << length() << std::endl ;

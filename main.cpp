@@ -3,6 +3,8 @@
 #include <unistd.h>
 #include <cstdlib>
 
+#include <SFML/Graphics.hpp>
+
 
 
 void help ()
@@ -10,8 +12,7 @@ void help ()
 	std::cout << "usage : 2_opt [options]" << std::endl ;
 	std::cout << "\t-h\t\tafficher l'aide" << std::endl ;
 	std::cout << "\t-n nombre\tmodifie le nombre de villes (défaut 10, de type int)"  << std::endl ;
-	std::cout << "\t-x|-y nombre\tcoordonnées minimales (défaut 0)" << std::endl ;
-	std::cout << "\t-X|-Y nombre\tcoordonnées maximales (défaut 100)" << std::endl ;
+	std::cout << "\t-x|-y nombre\ttaille de la fenêtre (défaut 800*600)" << std::endl ;
 }
 
 
@@ -19,14 +20,15 @@ void help ()
 
 int main (int argc, char ** argv)
 {
+
 	// Gestion des options
 	int c ;
 	bool errflag = false ;
 	int n = 10 ;
-	int x_min=0, x_max=100, y_min=0, y_max=100 ;
+	int x_max=800, y_max=600 ;
 	extern char *optarg ;
 	extern int optind ;
-	while ((c = getopt (argc, argv, "hvn:x:X:y:Y:")) != -1)
+	while ((c = getopt (argc, argv, "hvn:x:y:")) != -1)
 		switch (c)
 		{
 		case 'h':
@@ -37,15 +39,9 @@ int main (int argc, char ** argv)
 			n = (unsigned long) atoi (optarg) ;
 			break;
 		case 'x':
-			x_min = atoi (optarg) ;
-			break;
-		case 'X':
 			x_max = atoi (optarg) ;
 			break;
 		case 'y':
-			y_min = atoi (optarg) ;
-			break;
-		case 'Y':
 			y_max = atoi (optarg) ;
 			break;
 		default:
@@ -60,15 +56,46 @@ int main (int argc, char ** argv)
 		exit (1) ;
 	}
 
+	sf::RenderWindow window ;
 
-	Villes v(n,x_min,x_max,y_min,y_max);
+	window.create(sf::VideoMode(x_max, y_max), "My window");
+	window.setVerticalSyncEnabled(true);
+
+
+	Villes v(n,x_max,y_max);
 
 	Chemin ch(&v);
+
+	
 
 	ch.init_Random();
 	ch.display();
 
-	ch.opt();
+
+
+
+
+
+	while (window.isOpen())
+	{
+		// on inspecte tous les évènements de la fenêtre qui ont été émis depuis la précédente itération
+		sf::Event event;
+		while (window.pollEvent(event))
+		{
+			// évènement "fermeture demandée" : on ferme la fenêtre
+			if (event.type == sf::Event::Closed)
+			{
+				window.close();
+			}
+		}
+		window.clear(sf::Color::Black);
+
+		// c'est ici qu'on dessine tout
+		ch.render(&window) ;
+
+		// fin de la frame courante, affichage de tout ce qu'on a dessiné
+		window.display();
+	}
 
 	return 0;
 }
