@@ -5,6 +5,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
+#include <thread>
 
 
 void help ()
@@ -59,7 +60,8 @@ int main (int argc, char ** argv)
 	sf::RenderWindow window ;
 
 	window.create(sf::VideoMode(x_max, y_max), "My window");
-	window.setVerticalSyncEnabled(true);
+	// window.setVerticalSyncEnabled(true);
+
 
 
 	Villes v(n,x_max,y_max);
@@ -73,7 +75,8 @@ int main (int argc, char ** argv)
 
 
 
-
+	std::thread thread_opt( &Chemin::opt, &ch );
+	// ch.opt() ;
 
 
 	while (window.isOpen())
@@ -95,7 +98,10 @@ int main (int argc, char ** argv)
 
 		// fin de la frame courante, affichage de tout ce qu'on a dessiné
 		window.display();
+		sleep (1);
 	}
+
+	thread_opt.join() ;
 
 	return 0;
 }

@@ -3,6 +3,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <cmath>
+#include <unistd.h>
 
 
 // On suppose a<b
@@ -187,6 +188,7 @@ void Chemin::opt()
 				{
 					display();
 					echanger_aretes(i,j);
+					sleep (1);
 					ame = true;
 				}
 			}
