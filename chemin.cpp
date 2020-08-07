@@ -4,9 +4,15 @@
 #include <iostream>
 
 
+// On suppose a<b
+int rand_a_b(int a, int b){
+    return rand()%(b-a) +a;
+}
 
 
-void Villes::set_ville(unsigned long  i, int x, int y)
+
+
+void Villes::set_ville(int  i, int x, int y)
 {
 	villes_[i].first  = x;
 	villes_[i].second = y;
@@ -19,7 +25,7 @@ villes_t Villes::get_villes() const
 }
 
 
-ville_t Villes::get_ville(unsigned long i) const
+ville_t Villes::get_ville(int i) const
 {
 	return villes_[i];
 }
@@ -28,7 +34,7 @@ ville_t Villes::get_ville(unsigned long i) const
 void Villes::display() const
 {
 	std::cout << "{ ";
-	for (unsigned long i=0; i<get_villes().size(); i++)
+	for (int i=0; i<(int) get_villes().size(); i++)
 	{
 		std::cout << "(" << get_ville(i).first << "," << get_ville(i).second << ") ";
 	}
@@ -39,7 +45,7 @@ void Villes::display() const
 
 
 
-unsigned long Chemin::nb_villes() const
+int Chemin::nb_villes() const
 {
 	return nb_villes_;
 }
@@ -54,7 +60,7 @@ chemin_t Chemin::chemin() const
 void Chemin::display() const
 {
 	std::cout << "[ ";
-	for (unsigned long i=0; i<nb_villes(); i++)
+	for (int i=0; i<nb_villes(); i++)
 	{
 		std::cout << chemin()[i] << " ";
 	}
@@ -63,14 +69,28 @@ void Chemin::display() const
 
 
 
+void Chemin::echanger(int i, int j)
+{
+	int tmp = chemin_[i] ;
+	chemin_[i] = chemin_[j] ;
+	chemin_[j] = tmp ; 
+}
+
+
+
 void Chemin::init_Random()
 {
-
+	init_Order() ;
+	for (int i=0; i<nb_villes(); i++)
+	{
+		int indice = rand_a_b(i,nb_villes());
+		echanger(i, indice);
+	}
 }
 
 
 void Chemin::init_Order()
 {
-	for (unsigned long i=0; i<nb_villes(); i++)
-		chemin_[i] = i;
+	for (int i=0; i<nb_villes(); i++)
+		chemin_[i] = i ;
 }
