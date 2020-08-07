@@ -57,10 +57,11 @@ private:
 class Chemin
 {
 public:
-	Chemin(Villes *villes):
+	Chemin(Villes *villes, sf::RenderWindow *window):
 	nb_villes_(villes->get_villes().size()), chemin_(villes->get_villes().size())
 	{
-		villes_ = villes;
+		villes_ = villes ;
+		window_ = window ;
 	}
 	void init_Random();
 	void init_Order();
@@ -68,12 +69,13 @@ public:
 	int nb_villes() const;
 	Villes *villes() const;
 	chemin_t chemin() const;
+	int ville(int i) const;
 	void display() const;
 	double distance(int i, int j) const;
 	double length() const;
 	double gain(int i, int j) const;
 
-	void render(sf::RenderWindow *window) const;
+	void render() const;
 
 	void echanger(int i, int j);
 	void echanger_aretes(int i, int j);
@@ -83,6 +85,7 @@ private:
 	int nb_villes_;
 	chemin_t chemin_;	// indice des villes dans le chemin
 	Villes *villes_;
+	sf::RenderWindow *window_;
 };
 
 #endif

@@ -4,7 +4,7 @@
 #include <cstdlib>
 
 #include <SFML/Graphics.hpp>
-
+#include <SFML/System.hpp>
 
 
 void help ()
@@ -64,7 +64,7 @@ int main (int argc, char ** argv)
 
 	Villes v(n,x_max,y_max);
 
-	Chemin ch(&v);
+	Chemin ch( &v, &window );
 
 	
 
@@ -91,7 +91,7 @@ int main (int argc, char ** argv)
 		window.clear(sf::Color::Black);
 
 		// c'est ici qu'on dessine tout
-		ch.render(&window) ;
+		ch.render() ;
 
 		// fin de la frame courante, affichage de tout ce qu'on a dessiné
 		window.display();

@@ -64,6 +64,12 @@ chemin_t Chemin::chemin() const
 }
 
 
+int Chemin::ville(int i) const
+{
+	return chemin_[i] ;
+}
+
+
 void Chemin::display() const
 {
 	std::cout << "[ ";
@@ -95,14 +101,16 @@ double Chemin::length() const
 
 double Chemin::gain(int i, int j) const
 {
-	return distance( i, (i+1)%nb_villes() ) + distance( j, (j+1)%nb_villes() )
-			- distance( i, j ) - distance( (i+1)%nb_villes(), (j+1)%nb_villes() );
+	int ind1 = ville( i ), ind2 = ville( (i+1)%nb_villes() ),
+		ind3 = ville( j ), ind4 = ville( (j+1)%nb_villes() );
+	return distance( ind1, ind2 ) + distance( ind3, ind4 )
+		 - distance( ind1, ind3 ) - distance( ind2, ind4 );
 }
 
 
 
 
-void Chemin::render(sf::RenderWindow *window) const
+void Chemin::render() const
 {
 	for (int i=0; i<nb_villes(); i++)
 	{
@@ -110,7 +118,7 @@ void Chemin::render(sf::RenderWindow *window) const
 		ville.setPosition( villes()->get_ville(i).first  - ((int) TAILLE_VILLE)/2,
 						   villes()->get_ville(i).second - ((int) TAILLE_VILLE)/2 );
 		ville.setFillColor( sf::Color(255,255,0) );
-		window->draw( ville );
+		window_->draw( ville );
 
 		int j = (i+1) % nb_villes() ;
 		sf::Vertex line[] =
@@ -118,7 +126,7 @@ void Chemin::render(sf::RenderWindow *window) const
 			sf::Vertex(sf::Vector2f(villes()->get_ville(i).first, villes()->get_ville(i).second)),
 			sf::Vertex(sf::Vector2f(villes()->get_ville(j).first, villes()->get_ville(j).second)),
 		};
-		window->draw(line, 2, sf::Lines);
+		window_->draw(line, 2, sf::Lines);
 	}
 }
 
