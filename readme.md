@@ -16,7 +16,7 @@ The traveling salesman problem consists of a set of *n* cities, where each city 
 
 The set of all cities is represented with a weighted complete graph, the weight of each edge corresponding to the distance between the two cities.
 
-It is impossible to know efficiently the exact solution of such a problem, as soon as the number of cities is large (even 20 cities can take a relly long time), the complexity of the algorithm consisting of testing all the paths is in $O(n!)$. The algorithm of the *2-opt*, which runs in $O(n^2)$, will only give a relatively small path, but we won't be any mean to know if the result will be the shortest...
+It is impossible to know efficiently the exact solution of such a problem, as soon as the number of cities is large (even 20 cities can take a relly long time), the complexity of the algorithm consisting of testing all the paths is in *O(n!)*. The algorithm of the *2-opt*, which runs in *O(n²)*, will only give a relatively small path, but we won't be any mean to know if the result will be the shortest...
 
 
 
