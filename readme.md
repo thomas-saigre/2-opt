@@ -10,7 +10,6 @@ This mini-project is made with the C++ library [SFML](https://www.sfml-dev.org/i
 
 The traveling salesman problem consists of a set of *n* cities, where each city can reach all the other cities with a road. The goal for the traveling salesman is to visit all those cities once and get back to his depart point, using the shortest road as possible.
 
-![TSP example](https://upload.wikimedia.org/wikipedia/commons/1/11/GLPK_solution_of_a_travelling_salesman_problem.svg)
 
 
 ## Modelisation
