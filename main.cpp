@@ -11,9 +11,9 @@
 void help ()
 {
 	std::cout << "usage : 2_opt [options]" << std::endl ;
-	std::cout << "\t-h\t\tafficher l'aide" << std::endl ;
-	std::cout << "\t-n nombre\tmodifie le nombre de villes (défaut 10, de type int)"  << std::endl ;
-	std::cout << "\t-x|-y nombre\ttaille de la fenêtre (défaut 800*600)" << std::endl ;
+	std::cout << "\t-h\t\tshow help" << std::endl ;
+	std::cout << "\t-n number\tset the number of cities (default 10, of type int)"  << std::endl ;
+	std::cout << "\t-x|-y number\tset the size of the window (default 800*600)" << std::endl ;
 }
 
 
@@ -53,13 +53,13 @@ int main (int argc, char ** argv)
 	if (errflag)
 	{
 		std::cerr << "usage : " << argv[0] << " [options]" << std::endl ;
-		std::cerr << "Entrer " << argv[0] << " -h pour plus d'informations" << std::endl ;
+		std::cerr << "Entrer " << argv[0] << " -h for more informations" << std::endl ;
 		exit (1) ;
 	}
 
 	sf::RenderWindow window ;
 
-	window.create(sf::VideoMode(x_max, y_max), "My window");
+	window.create(sf::VideoMode(x_max, y_max), "2-opt swap");
 	// window.setVerticalSyncEnabled(true);
 
 

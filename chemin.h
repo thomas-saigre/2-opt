@@ -8,7 +8,8 @@
 
 
 #define TAILLE_VILLE 3.f
-#define TPS_ATTENTE 41000
+#define TPS_ATTENTE 10000
+//41000
 
 
 
